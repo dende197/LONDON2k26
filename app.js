@@ -159,7 +159,7 @@ const estimateData = [
 
 const euroRate = 1.17;
 
-function formatGbpAmount(value) {
+function formatGbp(value) {
   return `£${value.toFixed(2)}`;
 }
 
@@ -206,7 +206,7 @@ function renderAttractions() {
       <article class="card">
         <h3>${a.name}</h3>
         <div class="meta">
-          <span class="tag">Costo: ${formatGbpAmount(a.cost)}</span>
+          <span class="tag">Costo: ${formatGbp(a.cost)}</span>
           <span class="tag">Distanza dal centro (Charing Cross): ${a.distanceKm} km</span>
           <span class="tag">Mezzi: ${a.transport}</span>
         </div>
@@ -216,7 +216,7 @@ function renderAttractions() {
     .join("");
 
   const total = attractionsData.reduce((sum, a) => sum + a.cost, 0);
-  document.getElementById("totalCost").textContent = formatGbpAmount(total);
+  document.getElementById("totalCost").textContent = formatGbp(total);
   document.getElementById("totalCostEur").textContent = `≈ €${(total * euroRate).toFixed(2)}`;
 }
 
@@ -291,9 +291,7 @@ function renderEstimateSummary() {
   const target = document.getElementById("estimateSummary");
   const attractionTotal = attractionsData.reduce((sum, a) => sum + a.cost, 0);
   const dynamicEstimate = estimateData.map((item) =>
-    item.syncWithAttractions
-      ? { ...item, min: Math.min(item.min, attractionTotal), max: Math.max(item.max, attractionTotal) }
-      : item
+    item.syncWithAttractions ? { ...item, min: attractionTotal, max: attractionTotal } : item
   );
 
   const totalMin = dynamicEstimate.reduce((sum, item) => sum + item.min, 0);
@@ -337,8 +335,7 @@ installBtn?.addEventListener("click", async () => {
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    const swUrl = new URL("sw.js", window.location.href);
-    navigator.serviceWorker.register(swUrl);
+    navigator.serviceWorker.register("./sw.js");
   });
 }
 
