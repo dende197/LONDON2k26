@@ -150,7 +150,7 @@ const checklistData = [
 ];
 
 const estimateData = [
-  { category: "Attrazioni a pagamento", min: 90, max: 130, note: "Tower, Eye, Abbey/St Paul (selezione flessibile)" },
+  { category: "Attrazioni a pagamento", min: 90, max: 130, note: "Tower, Eye, Abbey/St Paul (selezione flessibile)", syncWithAttractions: true },
   { category: "Trasporti locali", min: 45, max: 65, note: "Daily cap zona 1-2 per 5 giorni" },
   { category: "Pasti", min: 95, max: 170, note: "Mix bakery + pub + cena seduta" },
   { category: "Mance e piccoli extra", min: 25, max: 50, note: "Free tour, snack, souvenir base" },
@@ -159,7 +159,7 @@ const estimateData = [
 
 const euroRate = 1.17;
 
-function formatMoneyGbp(value) {
+function formatGbpAmount(value) {
   return `£${value.toFixed(2)}`;
 }
 
@@ -206,7 +206,7 @@ function renderAttractions() {
       <article class="card">
         <h3>${a.name}</h3>
         <div class="meta">
-          <span class="tag">Costo: ${formatMoneyGbp(a.cost)}</span>
+          <span class="tag">Costo: ${formatGbpAmount(a.cost)}</span>
           <span class="tag">Distanza dal centro (Charing Cross): ${a.distanceKm} km</span>
           <span class="tag">Mezzi: ${a.transport}</span>
         </div>
@@ -216,7 +216,7 @@ function renderAttractions() {
     .join("");
 
   const total = attractionsData.reduce((sum, a) => sum + a.cost, 0);
-  document.getElementById("totalCost").textContent = formatMoneyGbp(total);
+  document.getElementById("totalCost").textContent = formatGbpAmount(total);
   document.getElementById("totalCostEur").textContent = `≈ €${(total * euroRate).toFixed(2)}`;
 }
 
@@ -291,7 +291,7 @@ function renderEstimateSummary() {
   const target = document.getElementById("estimateSummary");
   const attractionTotal = attractionsData.reduce((sum, a) => sum + a.cost, 0);
   const dynamicEstimate = estimateData.map((item) =>
-    item.category === "Attrazioni a pagamento"
+    item.syncWithAttractions
       ? { ...item, min: Math.min(item.min, attractionTotal), max: Math.max(item.max, attractionTotal) }
       : item
   );
