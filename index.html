@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#05070d" />
     <meta name="description" content="PWA moderna per organizzare il viaggio a Londra dal 23 al 27." />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="icon" type="image/svg+xml" href="/assets/icon-192.svg" />
-    <link rel="apple-touch-icon" href="/assets/icon-512.svg" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="./assets/icon-192.svg" />
+    <link rel="apple-touch-icon" href="./assets/icon-512.svg" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>LONDON 23→27 · Trip PWA</title>
   </head>
   <body>
@@ -53,6 +53,20 @@
       </section>
 
       <section class="grid two">
+        <article class="glass fade-in" id="itinerari">
+          <h2>Itinerari possibili con stima costi</h2>
+          <div id="itineraryOptions" class="cards"></div>
+        </article>
+
+        <article class="glass fade-in" id="hotelFood">
+          <h2>Dove mangiare in base alla zona hotel</h2>
+          <label class="field-label" for="hotelZone">Zona hotel</label>
+          <select id="hotelZone" class="select"></select>
+          <div id="foodSuggestions" class="stack"></div>
+        </article>
+      </section>
+
+      <section class="grid two">
         <article class="glass fade-in" id="checklist">
           <h2>Checklist prima di partire</h2>
           <div id="checkItems" class="checklist"></div>
@@ -68,8 +82,13 @@
         <h2>Attrazioni consigliate con costi e distanze</h2>
         <div id="attractions" class="cards"></div>
       </section>
+
+      <section class="glass fade-in" id="preventivo">
+        <h2>Preventivo completo viaggio</h2>
+        <div id="estimateSummary" class="summary-grid"></div>
+      </section>
     </main>
 
-    <script src="/app.js" defer></script>
+    <script src="./app.js" defer></script>
   </body>
 </html>
