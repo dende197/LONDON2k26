@@ -95,7 +95,7 @@ function renderAttractions() {
         <h3>${a.name}</h3>
         <div class="meta">
           <span class="tag">Costo: £${a.cost.toFixed(2)}</span>
-          <span class="tag">Distanza da Charing Cross: ${a.distanceKm} km</span>
+          <span class="tag">Distanza dal centro (Charing Cross): ${a.distanceKm} km</span>
           <span class="tag">Mezzi: ${a.transport}</span>
         </div>
         <p class="muted">Consiglio: ${a.tip}</p>
