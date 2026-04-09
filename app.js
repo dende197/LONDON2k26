@@ -29,6 +29,7 @@ const dayPlanData = [
   {
     date: "23 Apr",
     title: "Arrivo + centro città",
+    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
     focus: "Orientamento e ritmi leggeri",
     items: ["Check-in hotel", "Setup Oyster/contactless", "Covent Garden → Soho"],
     transport: "Tube + camminata",
@@ -39,6 +40,7 @@ const dayPlanData = [
   {
     date: "24 Apr",
     title: "Free Tour + Westminster",
+    img: "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=600&q=80",
     focus: "Monumenti iconici",
     items: ["Trafalgar", "Buckingham Palace", "St James's Park", "Big Ben + London Eye area"],
     transport: "A piedi + Tube",
@@ -49,6 +51,7 @@ const dayPlanData = [
   {
     date: "25 Apr",
     title: "Musei + Camden",
+    img: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600&q=80",
     focus: "Cultura + street vibe",
     items: ["Natural History o V&A", "South Kensington", "Camden serale"],
     transport: "Tube",
@@ -59,6 +62,7 @@ const dayPlanData = [
   {
     date: "26 Apr",
     title: "Tower area + skyline",
+    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
     focus: "Panorami e storia",
     items: ["Tower of London", "Tower Bridge", "Sky Garden"],
     transport: "Tube + passeggiata",
@@ -69,6 +73,7 @@ const dayPlanData = [
   {
     date: "27 Apr",
     title: "Notting Hill + rientro",
+    img: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80",
     focus: "Ultime tappe + transfer",
     items: ["Portobello Road", "Brunch", "Trasferimento aeroporto"],
     transport: "Tube/Train",
@@ -123,6 +128,7 @@ const airportTransferData = [
 const attractionsData = [
   {
     name: "Tower of London",
+    img: "https://images.unsplash.com/photo-1586277060690-b94100d8d5c9?w=600&q=80",
     cost: 34.8,
     distanceKm: 4.1,
     moveTime: "20–25 min",
@@ -133,6 +139,7 @@ const attractionsData = [
   },
   {
     name: "London Eye",
+    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80",
     cost: 29,
     distanceKm: 1.2,
     moveTime: "10–15 min",
@@ -143,6 +150,7 @@ const attractionsData = [
   },
   {
     name: "Westminster Abbey",
+    img: "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=600&q=80",
     cost: 29,
     distanceKm: 0.8,
     moveTime: "8–12 min",
@@ -153,6 +161,7 @@ const attractionsData = [
   },
   {
     name: "St Paul's Cathedral",
+    img: "https://images.unsplash.com/photo-1584452492747-02f6c3b9fc3b?w=600&q=80",
     cost: 26,
     distanceKm: 2.2,
     moveTime: "15–20 min",
@@ -163,6 +172,7 @@ const attractionsData = [
   },
   {
     name: "Sky Garden",
+    img: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600&q=80",
     cost: 0,
     distanceKm: 3.5,
     moveTime: "18–25 min",
@@ -254,6 +264,21 @@ const estimateData = [
   { category: "Transfer aeroporto A/R", min: 20, max: 60, note: "Variabile per aeroporto e orario" }
 ];
 
+const galleryData = [
+  { label: "Tower Bridge", img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=700&q=80" },
+  { label: "Big Ben & Westminster", img: "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=700&q=80" },
+  { label: "London Eye", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80" },
+  { label: "Covent Garden", img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" },
+  { label: "Camden Market", img: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=700&q=80" },
+  { label: "Notting Hill", img: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=700&q=80" },
+  { label: "St Paul's Cathedral", img: "https://images.unsplash.com/photo-1584452492747-02f6c3b9fc3b?w=700&q=80" },
+  { label: "Skyline City of London", img: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=700&q=80" },
+  { label: "Buckingham Palace", img: "https://images.unsplash.com/photo-1549778884-25b52d37b4de?w=700&q=80" },
+  { label: "Hyde Park", img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=700&q=80" },
+  { label: "South Bank al tramonto", img: "https://images.unsplash.com/photo-1533929736168-ef0b9fe27ba9?w=700&q=80" },
+  { label: "Borough Market", img: "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=700&q=80" }
+];
+
 function formatGbp(value) {
   return `£${value.toFixed(2)}`;
 }
@@ -290,6 +315,7 @@ function renderDayPlan() {
     .map(
       (day) => `
       <article class="day-item">
+        ${day.img ? `<div class="card-img-wrap"><img src="${day.img}" alt="${day.title}" loading="lazy" onerror="this.parentElement.style.display='none'" /></div>` : ""}
         <h3>${day.date} · ${day.title}</h3>
         <p class="muted">${day.focus}</p>
         <ul class="clean-list">${day.items.map((item) => `<li>${item}</li>`).join("")}</ul>
@@ -344,6 +370,7 @@ function renderAttractions() {
     .map(
       (a) => `
       <article class="card">
+        ${a.img ? `<div class="card-img-wrap"><img src="${a.img}" alt="${a.name}" loading="lazy" onerror="this.parentElement.style.display='none'" /></div>` : ""}
         <h3>${a.name}</h3>
         <div class="meta">
           <span class="tag">Costo: ${formatGbp(a.cost)}</span>
@@ -475,6 +502,44 @@ function renderEstimateSummary() {
     .join("");
 }
 
+function renderPhotoGallery() {
+  const target = document.getElementById("photoGallery");
+  if (!target) return;
+  target.innerHTML = galleryData
+    .map(
+      (photo) => `
+      <div class="gallery-item">
+        <img src="${photo.img}" alt="${photo.label}" loading="lazy" onerror="this.parentElement.style.display='none'" />
+        <div class="gallery-caption">${photo.label}</div>
+      </div>`
+    )
+    .join("");
+}
+
+function initScrollSpy() {
+  const sectionIds = ["intro", "infopoint", "giorni", "trasporti", "mappe", "cibo", "galleria", "checklist", "budget"];
+  const pills = document.querySelectorAll(".pill-nav .pill");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          pills.forEach((pill) => {
+            pill.classList.toggle("active", pill.getAttribute("href") === `#${id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+
+  sectionIds.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+}
+
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
 
@@ -506,3 +571,5 @@ renderMapPoints();
 renderChecklist();
 renderHotelZones();
 renderEstimateSummary();
+renderPhotoGallery();
+initScrollSpy();
