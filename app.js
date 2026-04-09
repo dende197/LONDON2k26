@@ -383,8 +383,16 @@ function renderMapPoints() {
 }
 
 function renderChecklist() {
+  const legacyStorageKey = "london-trip-checklist-v1";
   const storageKey = "london-trip-checklist-v2";
-  const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+  const currentSaved = JSON.parse(localStorage.getItem(storageKey) || "null");
+  const legacySaved = JSON.parse(localStorage.getItem(legacyStorageKey) || "{}");
+  const saved = currentSaved ?? legacySaved;
+
+  if (!localStorage.getItem(storageKey) && Object.keys(legacySaved).length > 0) {
+    localStorage.setItem(storageKey, JSON.stringify(legacySaved));
+  }
+
   const target = document.getElementById("checkItems");
 
   target.innerHTML = checklistData

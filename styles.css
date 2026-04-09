@@ -56,11 +56,11 @@ body {
 }
 
 .london-backdrop::before {
-  top: 24%;
+  top: 25%;
 }
 
 .london-backdrop::after {
-  top: 72%;
+  top: 75%;
   animation-direction: reverse;
 }
 
