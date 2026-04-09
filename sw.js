@@ -1,5 +1,14 @@
-const CACHE_NAME = "london-pwa-v1";
-const CORE_ASSETS = ["/", "/index.html", "/styles.css", "/app.js", "/manifest.webmanifest", "/assets/icon-192.svg", "/assets/icon-512.svg"];
+const CACHE_NAME = "london-pwa-v2";
+const BASE_PATH = new URL(self.registration.scope).pathname;
+const CORE_ASSETS = [
+  `${BASE_PATH}`,
+  `${BASE_PATH}index.html`,
+  `${BASE_PATH}styles.css`,
+  `${BASE_PATH}app.js`,
+  `${BASE_PATH}manifest.webmanifest`,
+  `${BASE_PATH}assets/icon-192.svg`,
+  `${BASE_PATH}assets/icon-512.svg`
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)));
@@ -25,7 +34,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
           return response;
         })
-        .catch(() => caches.match("/index.html"));
+        .catch(() => caches.match(`${BASE_PATH}index.html`));
     })
   );
 });
