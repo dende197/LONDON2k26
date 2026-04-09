@@ -3,88 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#05070d" />
+    <meta name="theme-color" content="#030303" />
     <meta name="description" content="PWA moderna per organizzare il viaggio a Londra dal 23 al 27." />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/svg+xml" href="./assets/icon-192.svg" />
     <link rel="apple-touch-icon" href="./assets/icon-512.svg" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>LONDON 23→27 · Trip PWA</title>
+    <title>LONDON 23→27 · City Companion</title>
   </head>
   <body>
-    <div class="ambient"></div>
+    <div class="london-backdrop"></div>
     <main class="container">
-      <header class="glass hero fade-in">
-        <p class="badge">LONDON TRIP · 23–27</p>
-        <h1>Itinerario smart in stile dark Apple</h1>
-        <p>
-          Piano viaggio moderno con infopoint, checklist, costi reali indicativi e suggerimenti extra ottimizzati per tempo,
-          distanza e mezzi.
+      <header class="hero glass fade-in" id="intro">
+        <p class="badge">LONDON 23–27 · TRAVEL APP</p>
+        <h1>Londra, chiara e intuitiva</h1>
+        <p class="hero-subtitle">
+          Tutto diviso in sezioni rapide: introduzione, infopoint, giorni, mappe, costi mezzi, distanze e budget.
         </p>
         <div class="hero-actions">
-          <button id="installBtn" class="btn primary" hidden>Installa PWA</button>
-          <a class="btn" href="#giorni">Vedi programma</a>
-          <a class="btn" href="#mappe">Apri mappe</a>
+          <button id="installBtn" class="btn primary" hidden>Installa App</button>
+          <a class="btn" href="#mappe">Apri mappa ora</a>
+          <a class="btn" href="#budget">Vai al budget</a>
         </div>
+        <div class="stats-row" id="quickStats"></div>
       </header>
 
-      <section class="grid two">
+      <nav class="glass pill-nav fade-in" aria-label="Navigazione sezioni">
+        <a href="#intro" class="pill">Intro</a>
+        <a href="#infopoint" class="pill">Infopoint</a>
+        <a href="#giorni" class="pill">Giorni</a>
+        <a href="#trasporti" class="pill">Trasporti</a>
+        <a href="#mappe" class="pill">Mappe</a>
+        <a href="#cibo" class="pill">Cibo</a>
+        <a href="#checklist" class="pill">Checklist</a>
+        <a href="#budget" class="pill">Budget</a>
+      </nav>
+
+      <section class="grid two" id="infopoint">
         <article class="glass fade-in">
-          <h2>Piano agenzia: Free Tour di Londra</h2>
+          <h2>Infopoint rapido</h2>
+          <div id="infoPoints" class="cards"></div>
+        </article>
+        <article class="glass fade-in">
+          <h2>Free Tour agenzia</h2>
           <ul class="clean-list">
             <li><strong>Durata:</strong> 2 ore</li>
-            <li><strong>Gruppi:</strong> max 6 persone (oltre: tour privato)</li>
-            <li><strong>Tappe:</strong> Trafalgar Square, Admiralty Arch, The Mall, Buckingham Palace, St. James's Park, Westminster Abbey (esterno), Big Ben</li>
-            <li><strong>Costo:</strong> free tour (mancia consigliata £10–20)</li>
+            <li><strong>Gruppo:</strong> fino a 6 persone</li>
+            <li><strong>Percorso:</strong> Trafalgar → Buckingham → St James's Park → Westminster → Big Ben</li>
+            <li><strong>Costo:</strong> gratuito + mancia consigliata £10–20</li>
           </ul>
-        </article>
-
-        <article class="glass fade-in" id="budgetCard">
-          <h2>Budget attrazioni (stimato)</h2>
-          <p class="muted">Totale calcolato sulle attività a pagamento consigliate qui sotto.</p>
-          <p class="big" id="totalCost">£0</p>
-          <p class="muted" id="totalCostEur">≈ €0</p>
         </article>
       </section>
 
       <section class="glass fade-in" id="giorni">
-        <h2>Programma giorno per giorno</h2>
+        <h2>Programma giorno per giorno (chiaro e sintetico)</h2>
         <div id="dayPlan" class="day-plan"></div>
       </section>
 
-      <section class="grid two">
-        <article class="glass fade-in" id="itinerari">
-          <h2>Itinerari possibili con stima costi</h2>
-          <div id="itineraryOptions" class="cards"></div>
+      <section class="grid two" id="trasporti">
+        <article class="glass fade-in">
+          <h2>Trasporti: costi e tempi utili</h2>
+          <div id="transportCosts" class="cards"></div>
         </article>
+        <article class="glass fade-in">
+          <h2>Transfer aeroporti</h2>
+          <div id="airportTransfer" class="cards"></div>
+        </article>
+      </section>
 
+      <section class="grid two" id="cibo">
         <article class="glass fade-in" id="hotelFood">
           <h2>Dove mangiare in base alla zona hotel</h2>
           <label class="field-label" for="hotelZone">Zona hotel</label>
           <select id="hotelZone" class="select"></select>
           <div id="foodSuggestions" class="stack"></div>
         </article>
-      </section>
-
-      <section class="grid two">
-        <article class="glass fade-in" id="checklist">
-          <h2>Checklist prima di partire</h2>
-          <div id="checkItems" class="checklist"></div>
-        </article>
 
         <article class="glass fade-in" id="mappe">
-          <h2>Mappe & infopoint utili</h2>
+          <h2>Mappe: anteprima + apertura app</h2>
+          <div class="map-preview-wrap">
+            <iframe
+              class="map-preview"
+              src="https://www.google.com/maps?q=London+Charing+Cross&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Anteprima mappa Londra"
+            ></iframe>
+          </div>
+          <div class="hero-actions">
+            <a class="btn primary" href="https://maps.google.com/?q=London+Charing+Cross" target="_blank" rel="noreferrer">Apri Google Maps</a>
+            <a class="btn" href="https://maps.apple.com/?q=London+Charing+Cross" target="_blank" rel="noreferrer">Apri Apple Maps</a>
+          </div>
           <div id="mapPoints" class="stack"></div>
         </article>
       </section>
 
-      <section class="glass fade-in" id="attrazioni">
-        <h2>Attrazioni consigliate con costi e distanze</h2>
-        <div id="attractions" class="cards"></div>
+      <section class="grid two">
+        <article class="glass fade-in" id="attrazioni">
+          <h2>Attrazioni con costo, distanza e spostamento</h2>
+          <div id="attractions" class="cards"></div>
+        </article>
+        <article class="glass fade-in" id="checklist">
+          <h2>Checklist prima di partire</h2>
+          <div id="checkItems" class="checklist"></div>
+        </article>
       </section>
 
-      <section class="glass fade-in" id="preventivo">
-        <h2>Preventivo completo viaggio</h2>
+      <section class="glass fade-in" id="budget">
+        <h2>Budget completo e intuitivo</h2>
+        <div class="summary-top">
+          <article class="card total-inline">
+            <h3>Totale attrazioni selezionate</h3>
+            <p class="big" id="totalCost">£0</p>
+            <p class="muted" id="totalCostEur">≈ €0</p>
+          </article>
+          <article class="card total-inline">
+            <h3>Totale viaggio stimato (senza hotel)</h3>
+            <p class="big" id="tripTotalRange">£0-£0</p>
+            <p class="muted" id="tripTotalRangeEur">≈ €0-€0</p>
+          </article>
+        </div>
         <div id="estimateSummary" class="summary-grid"></div>
       </section>
     </main>
