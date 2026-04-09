@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070d" />
+    <meta name="description" content="PWA moderna per organizzare il viaggio a Londra dal 23 al 27." />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/assets/icon-192.svg" />
+    <link rel="apple-touch-icon" href="/assets/icon-512.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>LONDON 23→27 · Trip PWA</title>
+  </head>
+  <body>
+    <div class="ambient"></div>
+    <main class="container">
+      <header class="glass hero fade-in">
+        <p class="badge">LONDON TRIP · 23–27</p>
+        <h1>Itinerario smart in stile dark Apple</h1>
+        <p>
+          Piano viaggio moderno con infopoint, checklist, costi reali indicativi e suggerimenti extra ottimizzati per tempo,
+          distanza e mezzi.
+        </p>
+        <div class="hero-actions">
+          <button id="installBtn" class="btn primary" hidden>Installa PWA</button>
+          <a class="btn" href="#giorni">Vedi programma</a>
+          <a class="btn" href="#mappe">Apri mappe</a>
+        </div>
+      </header>
+
+      <section class="grid two">
+        <article class="glass fade-in">
+          <h2>Piano agenzia: Free Tour di Londra</h2>
+          <ul class="clean-list">
+            <li><strong>Durata:</strong> 2 ore</li>
+            <li><strong>Gruppi:</strong> max 6 persone (oltre: tour privato)</li>
+            <li><strong>Tappe:</strong> Trafalgar Square, Admiralty Arch, The Mall, Buckingham Palace, St. James's Park, Westminster Abbey (esterno), Big Ben</li>
+            <li><strong>Costo:</strong> free tour (mancia consigliata £10–20)</li>
+          </ul>
+        </article>
+
+        <article class="glass fade-in" id="budgetCard">
+          <h2>Budget attrazioni (stimato)</h2>
+          <p class="muted">Totale calcolato sulle attività a pagamento consigliate qui sotto.</p>
+          <p class="big" id="totalCost">£0</p>
+          <p class="muted" id="totalCostEur">≈ €0</p>
+        </article>
+      </section>
+
+      <section class="glass fade-in" id="giorni">
+        <h2>Programma giorno per giorno</h2>
+        <div id="dayPlan" class="day-plan"></div>
+      </section>
+
+      <section class="grid two">
+        <article class="glass fade-in" id="checklist">
+          <h2>Checklist prima di partire</h2>
+          <div id="checkItems" class="checklist"></div>
+        </article>
+
+        <article class="glass fade-in" id="mappe">
+          <h2>Mappe & infopoint utili</h2>
+          <div id="mapPoints" class="stack"></div>
+        </article>
+      </section>
+
+      <section class="glass fade-in" id="attrazioni">
+        <h2>Attrazioni consigliate con costi e distanze</h2>
+        <div id="attractions" class="cards"></div>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "london2k26",
+  "version": "1.0.0",
+  "description": "PWA dark moderna per viaggio a Londra 23-27",
+  "main": "app.js",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "build": "echo 'Static PWA: nessuna build necessaria'",
+    "lint": "echo 'Nessun linter configurato'",
+    "test": "echo 'Nessun test configurato'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dende197/LONDON2k26.git"
+  },
+  "keywords": ["pwa", "london", "travel"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dende197/LONDON2k26/issues"
+  },
+  "homepage": "https://github.com/dende197/LONDON2k26#readme"
+}
