@@ -52,7 +52,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.2em;
   white-space: nowrap;
-  animation: slideLandmarks 34s linear infinite;
+  animation: slideLandmarks 72s linear infinite;
 }
 
 .london-backdrop::before {
