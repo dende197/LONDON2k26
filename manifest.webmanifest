@@ -1,6 +1,6 @@
 {
-  "name": "London Trip 23-27",
-  "short_name": "London23-27",
+  "name": "London Trip Planner",
+  "short_name": "LondonTrip",
   "description": "PWA moderna per organizzare il viaggio a Londra dal 23 al 27 con costi, mappe e checklist.",
   "start_url": "/",
   "display": "standalone",

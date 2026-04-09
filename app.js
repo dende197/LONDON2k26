@@ -58,7 +58,7 @@ const mapPointsData = [
 ];
 
 const checklistData = [
-  "Documento valido + eventuale ETA UK",
+  "Documento valido + eventuale UK ETA",
   "Assicurazione viaggio e numeri emergenza",
   "Prenotazioni attrazioni (Tower, London Eye, Sky Garden)",
   "Carta contactless e budget Oyster/Tube",
