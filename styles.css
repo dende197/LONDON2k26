@@ -166,8 +166,8 @@ p {
   display: flex;
   gap: 0.45rem;
   flex-wrap: wrap;
-  background: rgba(12, 7, 3, 0.92) !important;
-  border: 1px solid rgba(255, 160, 60, 0.35) !important;
+  background: rgba(12, 7, 3, 0.92);
+  border: 1px solid rgba(255, 160, 60, 0.35);
 }
 
 .pill {

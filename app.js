@@ -517,18 +517,26 @@ function renderPhotoGallery() {
 }
 
 function initScrollSpy() {
-  const sectionIds = ["intro", "infopoint", "giorni", "trasporti", "mappe", "cibo", "galleria", "checklist", "budget"];
   const pills = document.querySelectorAll(".pill-nav .pill");
+  const sectionIds = Array.from(pills)
+    .map((p) => p.getAttribute("href").slice(1))
+    .filter(Boolean);
+
+  const visibleSections = new Set();
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const id = entry.target.id;
-          pills.forEach((pill) => {
-            pill.classList.toggle("active", pill.getAttribute("href") === `#${id}`);
-          });
+          visibleSections.add(entry.target.id);
+        } else {
+          visibleSections.delete(entry.target.id);
         }
+      });
+
+      const firstVisible = sectionIds.find((id) => visibleSections.has(id));
+      pills.forEach((pill) => {
+        pill.classList.toggle("active", pill.getAttribute("href") === `#${firstVisible}`);
       });
     },
     { rootMargin: "-40% 0px -55% 0px" }
