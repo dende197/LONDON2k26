@@ -2,144 +2,303 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#030303" />
-    <meta name="description" content="PWA moderna per organizzare il viaggio a Londra dal 23 al 27." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="London 2026 Travel Companion — Il tuo viaggio a Londra dal 23 al 27 Aprile 2026, organizzato in modo chiaro e intuitivo." />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/svg+xml" href="./assets/icon-192.svg" />
     <link rel="apple-touch-icon" href="./assets/icon-512.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>LONDON 23→27 · City Companion</title>
+    <title>LONDON 2026 · Travel Companion</title>
   </head>
   <body>
-    <div class="london-backdrop"></div>
-    <main class="container">
-      <header class="hero glass fade-in" id="intro">
-        <div class="hero-photo-wrap">
-          <img
-            src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&q=80"
-            alt="Tower Bridge e il Tamigi visti dall'alto"
-            loading="eager"
-            onerror="this.parentElement.style.display='none'"
-          />
+    <!-- Animated London skyline background -->
+    <div class="skyline-bg" aria-hidden="true">
+      <div class="skyline-layer skyline-back"></div>
+      <div class="skyline-layer skyline-mid"></div>
+      <div class="skyline-layer skyline-front"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Liquid Glass Top Navigation -->
+    <nav class="topbar" id="topbar" aria-label="Navigazione principale">
+      <div class="topbar-inner">
+        <div class="topbar-brand">
+          <span class="brand-icon">🇬🇧</span>
+          <span class="brand-text">LONDON<span class="brand-year">2026</span></span>
         </div>
-        <p class="badge">LONDON 23–27 · TRAVEL APP</p>
-        <h1>Londra, chiara e intuitiva</h1>
-        <p class="hero-subtitle">
-          Tutto diviso in sezioni rapide: introduzione, infopoint, giorni, mappe, costi mezzi, distanze e budget.
-        </p>
-        <div class="hero-actions">
-          <button id="installBtn" class="btn primary" hidden>Installa App</button>
-          <a class="btn" href="#mappe">Apri mappa ora</a>
-          <a class="btn" href="#budget">Vai al budget</a>
+        <div class="pill-container" id="pillContainer">
+          <a href="#hero" class="pill active" data-section="hero">
+            <span class="pill-icon">🏠</span>
+            <span class="pill-label">Home</span>
+          </a>
+          <a href="#infopoint" class="pill" data-section="infopoint">
+            <span class="pill-icon">ℹ️</span>
+            <span class="pill-label">Info</span>
+          </a>
+          <a href="#voli" class="pill" data-section="voli">
+            <span class="pill-icon">✈️</span>
+            <span class="pill-label">Voli</span>
+          </a>
+          <a href="#hotel" class="pill" data-section="hotel">
+            <span class="pill-icon">🏨</span>
+            <span class="pill-label">Hotel</span>
+          </a>
+          <a href="#giorni" class="pill" data-section="giorni">
+            <span class="pill-icon">📅</span>
+            <span class="pill-label">Giorni</span>
+          </a>
+          <a href="#attrazioni" class="pill" data-section="attrazioni">
+            <span class="pill-icon">🎡</span>
+            <span class="pill-label">Attrazioni</span>
+          </a>
+          <a href="#mappe" class="pill" data-section="mappe">
+            <span class="pill-icon">🗺️</span>
+            <span class="pill-label">Mappe</span>
+          </a>
+          <a href="#trasporti" class="pill" data-section="trasporti">
+            <span class="pill-icon">🚇</span>
+            <span class="pill-label">Mezzi</span>
+          </a>
+          <a href="#cibo" class="pill" data-section="cibo">
+            <span class="pill-icon">🍽️</span>
+            <span class="pill-label">Cibo</span>
+          </a>
+          <a href="#checklist" class="pill" data-section="checklist">
+            <span class="pill-icon">✅</span>
+            <span class="pill-label">Checklist</span>
+          </a>
+          <a href="#budget" class="pill" data-section="budget">
+            <span class="pill-icon">💰</span>
+            <span class="pill-label">Budget</span>
+          </a>
+          <div class="pill-indicator" id="pillIndicator"></div>
         </div>
-        <div class="stats-row" id="quickStats"></div>
-      </header>
+      </div>
+    </nav>
 
-      <nav class="glass pill-nav fade-in" aria-label="Navigazione sezioni">
-        <a href="#intro" class="pill">Intro</a>
-        <a href="#infopoint" class="pill">Infopoint</a>
-        <a href="#giorni" class="pill">Giorni</a>
-        <a href="#trasporti" class="pill">Trasporti</a>
-        <a href="#mappe" class="pill">Mappe</a>
-        <a href="#cibo" class="pill">Cibo</a>
-        <a href="#galleria" class="pill">Galleria</a>
-        <a href="#checklist" class="pill">Checklist</a>
-        <a href="#budget" class="pill">Budget</a>
-      </nav>
+    <main class="app-container">
 
-      <section class="grid two" id="infopoint">
-        <article class="glass fade-in">
-          <h2>Infopoint rapido</h2>
-          <div id="infoPoints" class="cards"></div>
-        </article>
-        <article class="glass fade-in">
-          <h2>Free Tour agenzia</h2>
-          <ul class="clean-list">
-            <li><strong>Durata:</strong> 2 ore</li>
-            <li><strong>Gruppo:</strong> fino a 6 persone</li>
-            <li><strong>Percorso:</strong> Trafalgar → Buckingham → St James's Park → Westminster → Big Ben</li>
-            <li><strong>Costo:</strong> gratuito + mancia consigliata £10–20</li>
-          </ul>
-        </article>
+      <!-- ═══════════════ HERO SECTION ═══════════════ -->
+      <section class="section hero-section" id="hero">
+        <div class="hero-content">
+          <div class="hero-badge-row">
+            <span class="hero-badge">23 – 27 APRILE 2026</span>
+            <span class="hero-badge accent">4 NOTTI</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="hero-title-line">Benvenuti a</span>
+            <span class="hero-title-big">London<span class="hero-dot">.</span></span>
+          </h1>
+          <p class="hero-desc">Il tuo viaggio a Londra, organizzato in modo chiaro e intuitivo. Voli, hotel, attrazioni, mappe, costi e distanze — tutto in un'unica app.</p>
+
+          <div class="countdown-strip" id="countdown">
+            <div class="countdown-item">
+              <span class="countdown-num" id="countDays">--</span>
+              <span class="countdown-lbl">giorni</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-num" id="countHours">--</span>
+              <span class="countdown-lbl">ore</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-num" id="countMins">--</span>
+              <span class="countdown-lbl">minuti</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-num" id="countSecs">--</span>
+              <span class="countdown-lbl">secondi</span>
+            </div>
+          </div>
+
+          <div class="hero-stats" id="heroStats"></div>
+
+          <div class="hero-actions">
+            <button id="installBtn" class="btn-primary" hidden>
+              <span class="btn-icon">📲</span> Installa App
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-img-stack">
+            <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" alt="Tower Bridge Londra" class="hero-img hero-img-1" loading="eager" />
+            <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=800&q=80" alt="Big Ben Westminster" class="hero-img hero-img-2" loading="eager" />
+            <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="London Eye" class="hero-img hero-img-3" loading="eager" />
+          </div>
+        </div>
       </section>
 
-      <section class="glass fade-in" id="giorni">
-        <h2>Programma giorno per giorno (chiaro e sintetico)</h2>
-        <div id="dayPlan" class="day-plan"></div>
+      <!-- ═══════════════ INFOPOINT ═══════════════ -->
+      <section class="section" id="infopoint">
+        <div class="section-header">
+          <span class="section-icon">ℹ️</span>
+          <div>
+            <h2 class="section-title">Infopoint</h2>
+            <p class="section-sub">Tutto quello che devi sapere prima di partire</p>
+          </div>
+        </div>
+        <div class="info-grid" id="infoGrid"></div>
       </section>
 
-      <section class="grid two" id="trasporti">
-        <article class="glass fade-in">
-          <h2>Trasporti: costi e tempi utili</h2>
-          <div id="transportCosts" class="cards"></div>
-        </article>
-        <article class="glass fade-in">
-          <h2>Transfer aeroporti</h2>
-          <div id="airportTransfer" class="cards"></div>
-        </article>
+      <!-- ═══════════════ VOLI ═══════════════ -->
+      <section class="section" id="voli">
+        <div class="section-header">
+          <span class="section-icon">✈️</span>
+          <div>
+            <h2 class="section-title">Voli</h2>
+            <p class="section-sub">I tuoi voli Napoli ⇄ Londra Stansted</p>
+          </div>
+        </div>
+        <div class="flights-container" id="flights"></div>
       </section>
 
-      <section class="grid two" id="cibo">
-        <article class="glass fade-in" id="hotelFood">
-          <h2>Dove mangiare in base alla zona hotel</h2>
-          <label class="field-label" for="hotelZone">Zona hotel</label>
-          <select id="hotelZone" class="select"></select>
-          <div id="foodSuggestions" class="stack"></div>
-        </article>
+      <!-- ═══════════════ HOTEL ═══════════════ -->
+      <section class="section" id="hotel">
+        <div class="section-header">
+          <span class="section-icon">🏨</span>
+          <div>
+            <h2 class="section-title">Hotel</h2>
+            <p class="section-sub">Il tuo alloggio a Londra</p>
+          </div>
+        </div>
+        <div class="hotel-card-wrap" id="hotelCard"></div>
+      </section>
 
-        <article class="glass fade-in" id="mappe">
-          <h2>Mappe: anteprima + apertura app</h2>
-          <div class="map-preview-wrap">
+      <!-- ═══════════════ GIORNI ═══════════════ -->
+      <section class="section" id="giorni">
+        <div class="section-header">
+          <span class="section-icon">📅</span>
+          <div>
+            <h2 class="section-title">Programma Giornaliero</h2>
+            <p class="section-sub">Giorno per giorno, chiaro e sintetico</p>
+          </div>
+        </div>
+        <div class="day-timeline" id="dayTimeline"></div>
+      </section>
+
+      <!-- ═══════════════ ATTRAZIONI ═══════════════ -->
+      <section class="section" id="attrazioni">
+        <div class="section-header">
+          <span class="section-icon">🎡</span>
+          <div>
+            <h2 class="section-title">Attrazioni</h2>
+            <p class="section-sub">Costi, distanze e come arrivarci</p>
+          </div>
+        </div>
+        <div class="attractions-grid" id="attractionsGrid"></div>
+      </section>
+
+      <!-- ═══════════════ MAPPE ═══════════════ -->
+      <section class="section" id="mappe">
+        <div class="section-header">
+          <span class="section-icon">🗺️</span>
+          <div>
+            <h2 class="section-title">Mappe</h2>
+            <p class="section-sub">Anteprima e apertura diretta nelle app mappe</p>
+          </div>
+        </div>
+        <div class="maps-container">
+          <div class="map-embed-wrap">
             <iframe
-              class="map-preview"
-              src="https://www.google.com/maps?q=London+Charing+Cross&output=embed"
+              class="map-embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.47340002!2d-0.2416813!3d51.5287718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondra%2C%20Regno%20Unito!5e0!3m2!1sit!2sit!4v1681234567890"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              title="Anteprima mappa Londra"
+              title="Mappa di Londra"
+              allowfullscreen
             ></iframe>
           </div>
-          <div class="hero-actions">
-            <a class="btn primary" href="https://maps.google.com/?q=London+Charing+Cross" target="_blank" rel="noreferrer">Apri Google Maps</a>
-            <a class="btn" href="https://maps.apple.com/?q=London+Charing+Cross" target="_blank" rel="noreferrer">Apri Apple Maps</a>
+          <div class="map-actions">
+            <a class="map-btn google" href="https://maps.google.com/?q=Hilton+London+Metropole" target="_blank" rel="noreferrer">
+              <span class="map-btn-icon">📍</span> Apri Google Maps
+            </a>
+            <a class="map-btn apple" href="https://maps.apple.com/?q=Hilton+London+Metropole" target="_blank" rel="noreferrer">
+              <span class="map-btn-icon">🗺️</span> Apri Apple Maps
+            </a>
           </div>
-          <div id="mapPoints" class="stack"></div>
-        </article>
-      </section>
-
-      <section class="grid two">
-        <article class="glass fade-in" id="attrazioni">
-          <h2>Attrazioni con costo, distanza e spostamento</h2>
-          <div id="attractions" class="cards"></div>
-        </article>
-        <article class="glass fade-in" id="checklist">
-          <h2>Checklist prima di partire</h2>
-          <div id="checkItems" class="checklist"></div>
-        </article>
-      </section>
-
-      <section class="glass fade-in" id="galleria">
-        <h2>Galleria · Le icone di Londra</h2>
-        <div id="photoGallery" class="photo-gallery"></div>
-      </section>
-
-      <section class="glass fade-in" id="budget">
-        <h2>Budget completo e intuitivo</h2>
-        <div class="summary-top">
-          <article class="card total-inline">
-            <h3>Totale attrazioni selezionate</h3>
-            <p class="big" id="totalCost">£0</p>
-            <p class="muted" id="totalCostEur">≈ €0</p>
-          </article>
-          <article class="card total-inline">
-            <h3>Totale viaggio stimato (senza hotel)</h3>
-            <p class="big" id="tripTotalRange">£0-£0</p>
-            <p class="muted" id="tripTotalRangeEur">≈ €0-€0</p>
-          </article>
+          <div class="poi-grid" id="poiGrid"></div>
         </div>
-        <div id="estimateSummary" class="summary-grid"></div>
       </section>
+
+      <!-- ═══════════════ TRASPORTI ═══════════════ -->
+      <section class="section" id="trasporti">
+        <div class="section-header">
+          <span class="section-icon">🚇</span>
+          <div>
+            <h2 class="section-title">Trasporti & Mezzi</h2>
+            <p class="section-sub">Costi, tempi e consigli per muoversi</p>
+          </div>
+        </div>
+        <div class="transport-grid" id="transportGrid"></div>
+        <div class="section-divider"></div>
+        <h3 class="sub-section-title">Transfer Aeroportuali</h3>
+        <div class="airport-grid" id="airportGrid"></div>
+      </section>
+
+      <!-- ═══════════════ CIBO ═══════════════ -->
+      <section class="section" id="cibo">
+        <div class="section-header">
+          <span class="section-icon">🍽️</span>
+          <div>
+            <h2 class="section-title">Dove Mangiare</h2>
+            <p class="section-sub">Ristoranti consigliati per zona</p>
+          </div>
+        </div>
+        <div class="food-zone-selector">
+          <label class="zone-label" for="zoneSelect">Seleziona zona hotel</label>
+          <select id="zoneSelect" class="zone-select"></select>
+        </div>
+        <div class="food-grid" id="foodGrid"></div>
+      </section>
+
+      <!-- ═══════════════ CHECKLIST ═══════════════ -->
+      <section class="section" id="checklist">
+        <div class="section-header">
+          <span class="section-icon">✅</span>
+          <div>
+            <h2 class="section-title">Checklist</h2>
+            <p class="section-sub">Non dimenticare nulla prima di partire</p>
+          </div>
+        </div>
+        <div class="checklist-container" id="checklistContainer"></div>
+      </section>
+
+      <!-- ═══════════════ BUDGET ═══════════════ -->
+      <section class="section" id="budget">
+        <div class="section-header">
+          <span class="section-icon">💰</span>
+          <div>
+            <h2 class="section-title">Budget</h2>
+            <p class="section-sub">Riepilogo costi completo del viaggio</p>
+          </div>
+        </div>
+        <div class="budget-hero" id="budgetHero"></div>
+        <div class="budget-breakdown" id="budgetBreakdown"></div>
+      </section>
+
+      <!-- ═══════════════ GALLERY ═══════════════ -->
+      <section class="section" id="galleria">
+        <div class="section-header">
+          <span class="section-icon">📸</span>
+          <div>
+            <h2 class="section-title">Galleria</h2>
+            <p class="section-sub">Le icone di Londra</p>
+          </div>
+        </div>
+        <div class="gallery-mosaic" id="galleryMosaic"></div>
+      </section>
+
     </main>
+
+    <footer class="app-footer">
+      <p>London 2026 · Travel Companion</p>
+      <p class="footer-sub">23 – 27 Aprile 2026 · Napoli → Londra Stansted</p>
+    </footer>
 
     <script src="./app.js" defer></script>
   </body>
