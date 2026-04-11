@@ -1,12 +1,12 @@
 {
-  "name": "London Trip Planner",
-  "short_name": "LondonTrip",
-  "description": "PWA moderna per organizzare il viaggio a Londra dal 23 al 27 con costi, mappe e checklist.",
+  "name": "LONDON 2026 · Travel Companion",
+  "short_name": "LONDON2026",
+  "description": "Your ultimate PWA guide for London 2026. Interactive maps, flights, transport costs, and daily plans.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#05070d",
-  "theme_color": "#05070d",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "lang": "it-IT",
   "icons": [
     {
